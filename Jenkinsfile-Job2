@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'Built-In' }  // Forces execution on Jenkins Master Node
+    agent { label 'Built-In' }  // Run on Jenkins Master Node
 
     environment {
         INVENTORY_FILE = "/home/vagrant/inventory.ini"
