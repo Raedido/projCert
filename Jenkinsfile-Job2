@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'master' }  // Run on Jenkins Master
+    agent { label 'built-in' }  // Run on Jenkins Master Node
 
     environment {
         TEST_SERVER_IP = "172.20.20.101"
@@ -19,10 +19,13 @@ pipeline {
 
     post {
         success {
-            build job: 'Job3'
+            echo "✅ Job2 Completed Successfully: Docker installed via Ansible!"
+            build job: 'Job3'  // Trigger Job3
         }
         failure {
-            echo "Job 2 Failed: Docker installation via Ansible failed!"
+            echo "❌ Job2 Failed: Docker installation via Ansible failed!"
+            error("Stopping pipeline due to failure in Job2")
         }
     }
 }
+
