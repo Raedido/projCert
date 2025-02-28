@@ -19,7 +19,7 @@ pipeline {
 
     post {
         success {
-            build job: 'Deploy-Application'
+            build job: 'Job3'
         }
         failure {
             echo "Job 2 Failed: Docker installation via Ansible failed!"

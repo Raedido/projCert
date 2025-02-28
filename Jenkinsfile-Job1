@@ -20,7 +20,7 @@ pipeline {
 
     post {
         success {
-            build job: 'Configure-Docker-Ansible'
+            build job: 'Job2'
         }
         failure {
             echo "Job 1 Failed: Puppet Agent installation failed!"

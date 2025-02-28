@@ -30,7 +30,7 @@ pipeline {
             echo "Deployment completed successfully!"
         }
         failure {
-            build job: 'Cleanup-On-Failure'
+            build job: 'Job4'
         }
     }
 }
