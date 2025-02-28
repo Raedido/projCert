@@ -1,8 +1,10 @@
 pipeline {
-    agent { label 'built-in' }  // Run on Jenkins Master Node
+    agent any  // Run on any available Jenkins agent
 
     environment {
-        TEST_SERVER_IP = "172.20.20.101"
+        INVENTORY_FILE = "/home/vagrant/inventory.ini"
+        PLAYBOOK_FILE = "/var/lib/jenkins/installing_docker.yml"
+        SSH_KEY = "/home/vagrant/.ssh/id_rsa"
     }
 
     stages {
@@ -10,7 +12,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    ansible-playbook -i /home/vagrant/inventory.ini ~/installing_docker.yml
+                    ansible-playbook -i $INVENTORY_FILE --private-key=$SSH_KEY $PLAYBOOK_FILE
                     '''
                 }
             }
@@ -20,7 +22,7 @@ pipeline {
     post {
         success {
             echo "✅ Job2 Completed Successfully: Docker installed via Ansible!"
-            build job: 'Job3'  // Trigger Job3
+            build job: 'Job3'  // Trigger the next job
         }
         failure {
             echo "❌ Job2 Failed: Docker installation via Ansible failed!"
@@ -28,4 +30,3 @@ pipeline {
         }
     }
 }
-
