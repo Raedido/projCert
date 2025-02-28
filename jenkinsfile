@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'test_server1' }  // Run on Jenkins slave node
+    agent { label 'test-server1' }  // Run on Jenkins slave node
 
     environment {
         TEST_SERVER_IP = "172.20.20.101"
