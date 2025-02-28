@@ -1,5 +1,5 @@
 pipeline {
-    agent any  // Run on any available Jenkins agent
+    agent { label 'jenkins-host' }  // Forces execution on Jenkins Master Node
 
     environment {
         INVENTORY_FILE = "/home/vagrant/inventory.ini"
