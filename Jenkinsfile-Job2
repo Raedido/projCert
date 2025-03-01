@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    ansible-playbook -i /home/vagrant/inventory.ini ~/installing_docker.yml
+                    ansible-playbook -i /home/jenkins/inventory.ini ~/installing_docker.yml
                     '''
                 }
             }
