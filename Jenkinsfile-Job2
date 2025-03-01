@@ -3,14 +3,32 @@ pipeline {
 
     environment {
         TEST_SERVER_IP = "172.20.20.101"
+        INVENTORY_FILE = "/var/lib/jenkins/inventory.ini"
+        PLAYBOOK_FILE = "/var/lib/jenkins/installing_docker.yml"
     }
 
     stages {
+        stage('Clean Workspace') {
+            steps {
+                script {
+                    sh 'rm -rf *'  // Ensure a clean workspace
+                }
+            }
+        }
+
         stage('Configure Docker using Ansible') {
             steps {
                 script {
                     sh '''
-                    ansible-playbook -i /var/lib/jenkins/inventory.ini ~/installing_docker.yml
+                    #!/bin/bash
+                    echo "Starting Ansible Playbook for Docker Installation..."
+                    start_time=$(date +%s)
+
+                    # Run Ansible Playbook with optimized logging
+                    ANSIBLE_STDOUT_CALLBACK=default ansible-playbook -i $INVENTORY_FILE $PLAYBOOK_FILE -q
+
+                    end_time=$(date +%s)
+                    echo "✔ Playbook Execution Time: $((end_time - start_time)) seconds"
                     '''
                 }
             }
