@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'test-server1' }
+    agent { label 'test_server1' }
 
     environment {
         TEST_SERVER_IP = "172.20.20.101"
