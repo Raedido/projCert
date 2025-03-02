@@ -14,7 +14,7 @@ pipeline {
                 script {
                     sh '''
                     ssh -o StrictHostKeyChecking=no vagrant@${TEST_SERVER_IP} "[ -d ~/php-app ] || git clone ${REPO_URL} ~/php-app"
-                    ssh -o StrictHostKeyChecking=no vagrant@${TEST_SERVER_IP} "cd ~/php-app && git reset --hard origin/main && git pull"
+                    ssh -o StrictHostKeyChecking=no vagrant@${TEST_SERVER_IP} "cd ~/php-app && git reset --hard origin/master && git pull"
                     ssh -o StrictHostKeyChecking=no vagrant@${TEST_SERVER_IP} "cd ~/php-app && docker build -t ${DOCKER_IMAGE_NAME} ."
                     ssh -o StrictHostKeyChecking=no vagrant@${TEST_SERVER_IP} "docker stop ${CONTAINER_NAME} || true"
                     ssh -o StrictHostKeyChecking=no vagrant@${TEST_SERVER_IP} "docker rm -f ${CONTAINER_NAME} || true"
